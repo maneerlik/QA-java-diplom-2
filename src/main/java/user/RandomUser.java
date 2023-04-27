@@ -8,10 +8,12 @@ import pojo.User;
 import java.util.Locale;
 
 /**
+ * Утилитарный класс для генерации случайных тестовых данных сущности user
+ *
  * @author  smirnov sergey
  * @since   24.04.2023
  */
-public class UniqRandomUser {
+public class RandomUser {
 
     private static final Locale LOCALE = new Locale("en-GB");
     private static final Faker FAKER = new Faker(LOCALE);
@@ -20,14 +22,26 @@ public class UniqRandomUser {
     /**
      * приватный конструктор служебного класса
      */
-    private UniqRandomUser() {
+    private RandomUser() {
         throw new IllegalStateException("Utility class");
     }
 
+    public static String randomEmail() {
+        return FAKER.internet().emailAddress();
+    }
+
+    public static String randomPassword() {
+        return FAKE_VALUES_SERVICE.regexify("[0-9a-zA-Z]{8,}");
+    }
+
+    public static String randomName() {
+        return FAKER.name().firstName();
+    }
+
     public static User randomValidUser() {
-        return new User().setEmail(FAKER.internet().emailAddress())
-                .setPassword(FAKE_VALUES_SERVICE.regexify("[0-9a-zA-Z]{8,}"))
-                .setName(FAKER.name().firstName());
+        return new User().setEmail(randomEmail())
+                .setPassword(randomPassword())
+                .setName(randomName());
     }
 
     public static User randomUserWithoutEmail() {

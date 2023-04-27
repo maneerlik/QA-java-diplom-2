@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 import static pojo.UserCreds.credsFrom;
 import static steps.BaseSteps.checkRespStatus;
 import static steps.BaseSteps.checkRespStatusCode;
-import static user.UniqRandomUser.randomValidUser;
+import static user.RandomUser.randomValidUser;
 
 /**
  * Тест регистрации нового уникального пользователя
@@ -41,7 +41,7 @@ public class NewUniqUserRegistrationTest {
     @Test
     @DisplayName("Регистрация нового уникального пользователя")
     @Description("Базовый тест эндпоинта: /api/auth/register")
-    @Severity(SeverityLevel.CRITICAL)
+    @Severity(SeverityLevel.BLOCKER)
     public void registrationNewUniqUserTest() {
         ValidatableResponse response = client.register(user);
         checkRespStatusCode(response, HttpStatus.SC_OK);

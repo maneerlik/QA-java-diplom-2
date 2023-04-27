@@ -9,7 +9,8 @@ public enum Endpoints {
     BASE_URI("https://stellarburgers.nomoreparties.site/"),
     REGISTER_USER("/api/auth/register"),
     LOGIN_USER("/api/auth/login"),
-    DELETE_USER("/api/auth/user");
+    DELETE_USER("/api/auth/user"),
+    UPDATE_USER("/api/auth/user");
 
     private String endpoint;
 

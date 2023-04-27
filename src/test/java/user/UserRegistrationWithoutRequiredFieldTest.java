@@ -16,7 +16,7 @@ import java.util.Collection;
 import static pojo.UserCreds.credsFrom;
 import static steps.BaseSteps.checkRespBodyMessage;
 import static steps.BaseSteps.checkRespStatusCode;
-import static user.UniqRandomUser.*;
+import static user.RandomUser.*;
 
 /**
  * Тест регистрации пользователя без обязательных полей

@@ -8,7 +8,7 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Реализация универсальных базовых шагов
+ * Класс, реализующий универсальные базовые шаги
  *
  * @author  smirnov sergey
  * @since   24.04.2023
@@ -25,9 +25,14 @@ public class BaseSteps {
         response.assertThat().body("success", equalTo(message));
     }
 
-    @Step("Проверка ответа. Элемент {element} не пустой")
-    public static void checkRespBodyElementIsNotNull(ValidatableResponse response, String element) {
-        response.assertThat().body(element, notNullValue());
+    @Step("Проверка ответа. Значение поля {field} корректно")
+    public static void checkRespBodyElement(ValidatableResponse response, String field, String value) {
+        response.assertThat().body(field, equalTo(value));
+    }
+
+    @Step("Проверка ответа. Поле {field} не пустое")
+    public static void checkRespBodyElementIsNotNull(ValidatableResponse response, String field) {
+        response.assertThat().body(field, notNullValue());
     }
 
     @Step("Сообщение ответа: {message}")

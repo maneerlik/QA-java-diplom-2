@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 
 import static pojo.UserCreds.credsFrom;
 import static steps.BaseSteps.*;
-import static user.UniqRandomUser.randomValidUser;
+import static user.RandomUser.randomValidUser;
 
 /**
  * Тест регистрации двух идентичных пользователей
@@ -31,7 +31,7 @@ public class TwoIdenticalUsersRegistrationTest {
     public void setup() {
         user = randomValidUser();
         client = new UserClient();
-        Logger log = Logger.getLogger(NewUniqUserRegistrationTest.class.getName());
+        Logger log = Logger.getLogger(TwoIdenticalUsersRegistrationTest.class.getName());
         log.info(new GsonBuilder().setPrettyPrinting().create().toJson(user));
     }
 

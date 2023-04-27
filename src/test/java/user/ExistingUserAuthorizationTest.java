@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 
 import static pojo.UserCreds.credsFrom;
 import static steps.BaseSteps.*;
-import static user.UniqRandomUser.randomValidUser;
+import static user.RandomUser.randomValidUser;
 
 /**
  * Тест авторизации существующего пользователя
@@ -31,7 +31,7 @@ public class ExistingUserAuthorizationTest {
     public void setup() {
         user = randomValidUser();
         client = new UserClient();
-        Logger log = Logger.getLogger(NewUniqUserRegistrationTest.class.getName());
+        Logger log = Logger.getLogger(ExistingUserAuthorizationTest.class.getName());
         log.info(new GsonBuilder().setPrettyPrinting().create().toJson(user));
     }
 
@@ -48,7 +48,8 @@ public class ExistingUserAuthorizationTest {
         checkRespStatus(response, true);
         checkRespBodyElementIsNotNull(response, "accessToken");
         checkRespBodyElementIsNotNull(response, "refreshToken");
-        checkRespBodyElementIsNotNull(response, "user");
+        checkRespBodyElement(response, "user.email", user.getEmail());
+        checkRespBodyElement(response, "user.name", user.getName());
     }
 
     @After
