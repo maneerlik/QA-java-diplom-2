@@ -15,7 +15,7 @@ import static api.Specification.setSpec;
  * @author  smirnov sergey
  * @since   28.04.2023
  */
-public class IClient {
+public class IngtClient {
 
     @Step("Получение списка ингредиентов")
     public List<Ingredient> getIngredients() {

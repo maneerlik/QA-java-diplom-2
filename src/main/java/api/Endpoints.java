@@ -12,7 +12,8 @@ public enum Endpoints {
     DELETE_USER("/api/auth/user"),
     UPDATE_USER("/api/auth/user"),
     CREATE_ORDER("/api/orders"),
-    GET_INGREDIENTS("/api/ingredients");
+    GET_INGREDIENTS("/api/ingredients"),
+    GET_ORDERS("/api/orders");
 
     private String endpoint;
 

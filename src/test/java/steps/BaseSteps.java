@@ -1,10 +1,14 @@
 package steps;
 
+import controllers.user.UserClient;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
+import model.pojo.User;
+import org.apache.http.HttpStatus;
 
 import java.util.List;
 
+import static model.pojo.UserCreds.credsFrom;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertEquals;
@@ -59,6 +63,15 @@ public class BaseSteps {
     public static void checkResponse(ValidatableResponse response, int respStatusCode, Boolean respStatusMessage) {
         checkRespStatusCode(response, respStatusCode);
         checkRespStatus(response, respStatusMessage);
+    }
+
+    @Step("Удаление тестовых данных")
+    public static void delete(User user) {
+        UserClient client = new UserClient();
+        ValidatableResponse response = client.login(credsFrom(user));
+
+        if(response.extract().statusCode() == HttpStatus.SC_OK)
+            client.delete(response.extract().path("accessToken").toString());
     }
 
 }

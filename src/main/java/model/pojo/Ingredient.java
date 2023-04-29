@@ -28,7 +28,8 @@ public class Ingredient {
     public Ingredient() {
     }
 
-    public Ingredient(String id, String name, String type, Integer proteins, Integer fat, Integer carbohydrates, Integer calories, Integer price, String image, String imageMobile, String imageLarge, Integer v) {
+    public Ingredient(String id, String name, String type, Integer proteins, Integer fat, Integer carbohydrates,
+                      Integer calories, Integer price, String image, String imageMobile, String imageLarge, Integer v) {
         this.id = id;
         this.name = name;
         this.type = type;

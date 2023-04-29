@@ -5,17 +5,17 @@ import controllers.user.UserClient;
 import io.qameta.allure.*;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
+import model.pojo.User;
 import org.apache.http.HttpStatus;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import model.pojo.User;
 
 import java.util.logging.Logger;
 
-import static model.pojo.UserCreds.credsFrom;
 import static data.RandomUser.randomValidUser;
-import static steps.BaseSteps.*;
+import static steps.BaseSteps.checkResponse;
+import static steps.BaseSteps.delete;
 
 /**
  * Тест регистрации пользователя
@@ -60,9 +60,8 @@ public class UserRegistrationTest {
     }
 
     @After
-    public void deleteUser() {
-        ValidatableResponse response = client.login(credsFrom(user));
-        client.delete(response.extract().path("accessToken").toString());
+    public void deleteData() {
+        delete(user);
     }
 
 }

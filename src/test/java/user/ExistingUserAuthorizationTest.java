@@ -53,9 +53,8 @@ public class ExistingUserAuthorizationTest {
     }
 
     @After
-    public void deleteUser() {
-        ValidatableResponse response = client.login(credsFrom(user));
-        client.delete(response.extract().path("accessToken").toString());
+    public void deleteData() {
+        delete(user);
     }
 
 }
