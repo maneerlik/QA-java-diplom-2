@@ -3,6 +3,8 @@ package steps;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 
+import java.util.List;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertEquals;
@@ -15,14 +17,14 @@ import static org.junit.Assert.assertEquals;
  */
 public class BaseSteps {
 
-    @Step("Статус код ответа: {status}")
-    public static void checkRespStatusCode(ValidatableResponse response, int status) {
-        assertEquals("Статус код неверный", status, response.extract().statusCode());
+    @Step("Статус код ответа: {respStatusCode}")
+    public static void checkRespStatusCode(ValidatableResponse response, int respStatusCode) {
+        assertEquals("Статус код неверный", respStatusCode, response.extract().statusCode());
     }
 
-    @Step("Статус ответа: {message}")
-    public static void checkRespStatus(ValidatableResponse response, Boolean message) {
-        response.assertThat().body("success", equalTo(message));
+    @Step("Статус ответа: {respStatusMessage}")
+    public static void checkRespStatus(ValidatableResponse response, Boolean respStatusMessage) {
+        response.assertThat().body("success", equalTo(respStatusMessage));
     }
 
     @Step("Проверка ответа. Значение поля {field} корректно")
@@ -30,20 +32,33 @@ public class BaseSteps {
         response.assertThat().body(field, equalTo(value));
     }
 
-    @Step("Проверка ответа. Поле {field} не пустое")
+    // проверка списка полей ответа на пустоту
+    @Step("Проверка полей ответа")
+    public static void checkRespBodyItemsListIsNotNull(ValidatableResponse response, List<String> fields) {
+        fields.forEach(x -> BaseSteps.checkRespBodyElementIsNotNull(response, x));
+    }
+
+    @Step("Поле {field} не пустое")
     public static void checkRespBodyElementIsNotNull(ValidatableResponse response, String field) {
         response.assertThat().body(field, notNullValue());
     }
 
-    @Step("Сообщение ответа: {message}")
-    public static void checkRespBodyMessage(ValidatableResponse response, String message) {
-        response.assertThat().body("message", equalTo(message));
+    @Step("Сообщение ответа: {respMessage}")
+    public static void checkRespBodyMessage(ValidatableResponse response, String respMessage) {
+        response.assertThat().body("message", equalTo(respMessage));
     }
 
     @Step("Проверка ответа")
-    public static void checkResponce(ValidatableResponse response, int status, Boolean message) {
-        checkRespStatusCode(response, status);
-        checkRespStatus(response, message);
+    public static void checkResponse(ValidatableResponse response, int respStatusCode, Boolean respStatusMessage, String respMessage) {
+        checkRespStatusCode(response, respStatusCode);
+        checkRespStatus(response, respStatusMessage);
+        checkRespBodyMessage(response, respMessage);
+    }
+
+    @Step("Проверка ответа")
+    public static void checkResponse(ValidatableResponse response, int respStatusCode, Boolean respStatusMessage) {
+        checkRespStatusCode(response, respStatusCode);
+        checkRespStatus(response, respStatusMessage);
     }
 
 }

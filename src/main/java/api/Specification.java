@@ -14,7 +14,7 @@ import static io.restassured.RestAssured.given;
  */
 public class Specification {
 
-    public static RequestSpecification spec() {
+    public static RequestSpecification setSpec() {
         return given().log().all()
                 .contentType(ContentType.JSON)
                 .baseUri(BASE_URI.getEndpoint());

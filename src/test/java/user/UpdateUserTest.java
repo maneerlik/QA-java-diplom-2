@@ -26,7 +26,7 @@ import static data.RandomUser.*;
 public class UpdateUserTest {
 
     private User user;
-    private UserClient client; // утилитарный объект для работы с рестами пользователя
+    private UserClient client; // утилитарный объект для работы с пользователем
 
     @Before
     public void setup() {
@@ -44,9 +44,7 @@ public class UpdateUserTest {
     @Severity(SeverityLevel.CRITICAL)
     public void unauthorizedUserUpdateTest() {
         ValidatableResponse response = client.update(user);
-        checkRespStatusCode(response, HttpStatus.SC_UNAUTHORIZED);
-        checkRespStatus(response, false);
-        checkRespBodyMessage(response, "You should be authorised");
+        checkResponse(response, HttpStatus.SC_UNAUTHORIZED, false, "You should be authorised");
     }
 
     @Epic(value = "Получение и обновление информации о пользователе")
@@ -55,14 +53,13 @@ public class UpdateUserTest {
     @DisplayName("Обновление информации авторизованного пользователя")
     @Severity(SeverityLevel.CRITICAL)
     public void authorizedUserUpdateTest() {
-        ValidatableResponse register = client.register(user);
+        ValidatableResponse register = client.register(user); // регистрирует нового пользователя
         String accessToken = register.extract().path("accessToken");
-        user.setEmail(randomEmail()).setName(randomName());
-        ValidatableResponse response = client.update(user, accessToken);
-        checkRespStatusCode(response, HttpStatus.SC_OK);
-        checkRespStatus(response, true);
-        checkRespBodyElement(response, "user.email", user.getEmail());
-        checkRespBodyElement(response, "user.name", user.getName());
+        user.setEmail(randomEmail()).setName(randomName()); // меняет данные пользователя
+        ValidatableResponse update = client.update(user, accessToken); // обновляет данные пользователя
+        checkResponse(update, HttpStatus.SC_OK, true);
+        checkRespBodyElement(update, "user.email", user.getEmail());
+        checkRespBodyElement(update, "user.name", user.getName());
     }
 
     @After

@@ -15,8 +15,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import static model.pojo.UserCreds.credsFrom;
-import static steps.BaseSteps.checkRespBodyMessage;
-import static steps.BaseSteps.checkRespStatusCode;
+import static steps.BaseSteps.*;
 import static data.RandomUser.*;
 
 /**
@@ -62,8 +61,7 @@ public class UserRegistrationWithoutRequiredFieldTest {
     @Severity(SeverityLevel.CRITICAL)
     public void registrationWithoutRequiredFieldTest() {
         ValidatableResponse response = client.register(user, blankField);
-        checkRespStatusCode(response, HttpStatus.SC_FORBIDDEN);
-        checkRespBodyMessage(response, "Email, password and name are required fields");
+        checkResponse(response, HttpStatus.SC_FORBIDDEN, false, "Email, password and name are required fields");
     }
 
     @After

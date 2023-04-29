@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import model.pojo.User;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import static model.pojo.UserCreds.credsFrom;
@@ -26,7 +27,7 @@ import static data.RandomUser.randomValidUser;
 public class ExistingUserAuthorizationTest {
 
     private User user;
-    private UserClient client; // утилитарный объект для работы с рестами пользователя
+    private UserClient client; // утилитарный объект для работы с пользователем
 
     @Before
     public void setup() {
@@ -45,9 +46,8 @@ public class ExistingUserAuthorizationTest {
     public void userAuthorizationTest() {
         client.register(user);
         ValidatableResponse response = client.login(credsFrom(user));
-        checkResponce(response, HttpStatus.SC_OK, true);
-        checkRespBodyElementIsNotNull(response, "accessToken");
-        checkRespBodyElementIsNotNull(response, "refreshToken");
+        checkResponse(response, HttpStatus.SC_OK, true);
+        checkRespBodyItemsListIsNotNull(response, List.of("accessToken", "refreshToken"));
         checkRespBodyElement(response, "user.email", user.getEmail());
         checkRespBodyElement(response, "user.name", user.getName());
     }

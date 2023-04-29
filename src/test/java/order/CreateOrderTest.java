@@ -10,6 +10,7 @@ import org.apache.http.HttpStatus;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Collections;
 import java.util.List;
 
 import static steps.BaseSteps.*;
@@ -22,8 +23,8 @@ import static steps.BaseSteps.*;
  */
 public class CreateOrderTest {
 
-    private IClient iClient;
-    private OrderClient orderClient;
+    private IClient iClient; // утилитарный объект для работы с ингредиентами
+    private OrderClient orderClient; // утилитарный объект для работы с заказами
     private List<String> hashes; // лист хэш-кодов ингредиентов
 
     @Before
@@ -36,12 +37,25 @@ public class CreateOrderTest {
     @Epic(value = "Заказ")
     @Feature(value = "Создание заказа")
     @Test
-    @DisplayName("Создание заказа без авторизации")
-    @Description("Базовый тест эндпоинта: /api/orders")
+    @DisplayName("Создание заказа без ингредиентов")
+    @Description("Попытка создания заказа с пустым списком ингредиентов")
     @Severity(SeverityLevel.CRITICAL)
-    public void creatingOrderWithoutAutorizationTest() {
+    public void creatingOrderWithoutIngredientListTest() {
         ValidatableResponse response = orderClient.create(new Order());
-        checkResponce(response, HttpStatus.SC_BAD_REQUEST, false);
+        checkResponse(response, HttpStatus.SC_BAD_REQUEST, false, "Ingredient ids must be provided");
+    }
+
+    @Epic(value = "Заказ")
+    @Feature(value = "Создание заказа")
+    @Test
+    @DisplayName("Создание заказа c ингредиентами без авторизации")
+    @Description("Создание заказа с валидным списком ингредиентов без авторизации")
+    @Severity(SeverityLevel.CRITICAL)
+    public void creatingOrderValidIngredientListWithoutAuthorizationTest() {
+        Collections.shuffle(hashes); // перемешивает хэш-коды ингредиентов
+        ValidatableResponse response = orderClient.create(new Order(hashes.subList(0, 3))); // создает заказ, используя 3 случайных ингредиента
+        checkResponse(response, HttpStatus.SC_OK, true);
+        checkRespBodyItemsListIsNotNull(response, List.of("name", "order.number"));
     }
 
 }

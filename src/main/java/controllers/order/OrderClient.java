@@ -5,7 +5,7 @@ import io.restassured.response.ValidatableResponse;
 import model.pojo.Order;
 
 import static api.Endpoints.CREATE_ORDER;
-import static api.Specification.spec;
+import static api.Specification.setSpec;
 
 /**
  * Служебный класс для взаимодействия с сущностью Order
@@ -17,7 +17,7 @@ public class OrderClient {
 
     @Step("Создание заказа")
     public ValidatableResponse create(Order order) {
-        return spec().body(order).post(CREATE_ORDER.getEndpoint()).then();
+        return setSpec().body(order).post(CREATE_ORDER.getEndpoint()).then();
     }
 
 }

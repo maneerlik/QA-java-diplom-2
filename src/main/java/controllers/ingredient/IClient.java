@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static api.Endpoints.GET_INGREDIENTS;
-import static api.Specification.spec;
+import static api.Specification.setSpec;
 
 /**
  * Служебный класс для взаимодействия с сущностью Ingredient
@@ -19,7 +19,7 @@ public class IClient {
 
     @Step("Получение списка ингредиентов")
     public List<Ingredient> getIngredients() {
-        return spec().get(GET_INGREDIENTS.getEndpoint())
+        return setSpec().get(GET_INGREDIENTS.getEndpoint())
                 .then()
                 .extract()
                 .body()

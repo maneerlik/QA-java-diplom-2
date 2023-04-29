@@ -14,26 +14,37 @@ import model.pojo.User;
 import java.util.logging.Logger;
 
 import static model.pojo.UserCreds.credsFrom;
-import static steps.BaseSteps.*;
 import static data.RandomUser.randomValidUser;
+import static steps.BaseSteps.*;
 
 /**
- * Тест регистрации двух идентичных пользователей
+ * Тест регистрации пользователя
  *
  * @author  smirnov sergey
- * @since   26.04.2023
+ * @since   24.04.2023
  */
-public class TwoIdenticalUsersRegistrationTest {
+public class UserRegistrationTest {
 
     private User user;
-    private UserClient client; // утилитарный объект для работы с рестами пользователя
+    private UserClient client; // утилитарный объект для работы с пользователем
 
     @Before
     public void setup() {
         user = randomValidUser();
         client = new UserClient();
-        Logger log = Logger.getLogger(TwoIdenticalUsersRegistrationTest.class.getName());
+        Logger log = Logger.getLogger(UserRegistrationTest.class.getName());
         log.info(new GsonBuilder().setPrettyPrinting().create().toJson(user));
+    }
+
+    @Epic(value = "Авторизация и регистрация пользователя")
+    @Feature(value = "Регистрация пользователя")
+    @Test
+    @DisplayName("Регистрация нового уникального пользователя")
+    @Description("Базовый тест эндпоинта: /api/auth/register")
+    @Severity(SeverityLevel.BLOCKER)
+    public void registrationNewUniqUserTest() {
+        ValidatableResponse response = client.register(user);
+        checkResponse(response, HttpStatus.SC_OK, true);
     }
 
     @Epic(value = "Авторизация и регистрация пользователя")
@@ -45,8 +56,7 @@ public class TwoIdenticalUsersRegistrationTest {
     public void registrationTwoIdenticalUsersTest() {
         client.register(user);
         ValidatableResponse response = client.register(user);
-        checkRespStatusCode(response, HttpStatus.SC_FORBIDDEN);
-        checkRespBodyMessage(response, "User already exists");
+        checkResponse(response, HttpStatus.SC_FORBIDDEN, false, "User already exists");
     }
 
     @After
@@ -54,5 +64,5 @@ public class TwoIdenticalUsersRegistrationTest {
         ValidatableResponse response = client.login(credsFrom(user));
         client.delete(response.extract().path("accessToken").toString());
     }
-    
+
 }
