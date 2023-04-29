@@ -1,6 +1,7 @@
 package user;
 
 import com.google.gson.GsonBuilder;
+import controllers.user.UserClient;
 import io.qameta.allure.*;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
@@ -8,13 +9,13 @@ import org.apache.http.HttpStatus;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import pojo.User;
+import model.pojo.User;
 
 import java.util.logging.Logger;
 
-import static pojo.UserCreds.credsFrom;
+import static model.pojo.UserCreds.credsFrom;
 import static steps.BaseSteps.*;
-import static user.RandomUser.randomValidUser;
+import static data.RandomUser.randomValidUser;
 
 /**
  * Тест авторизации существующего пользователя
@@ -44,8 +45,7 @@ public class ExistingUserAuthorizationTest {
     public void userAuthorizationTest() {
         client.register(user);
         ValidatableResponse response = client.login(credsFrom(user));
-        checkRespStatusCode(response, HttpStatus.SC_OK);
-        checkRespStatus(response, true);
+        checkResponce(response, HttpStatus.SC_OK, true);
         checkRespBodyElementIsNotNull(response, "accessToken");
         checkRespBodyElementIsNotNull(response, "refreshToken");
         checkRespBodyElement(response, "user.email", user.getEmail());

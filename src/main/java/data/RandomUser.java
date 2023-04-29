@@ -1,14 +1,14 @@
-package user;
+package data;
 
 import com.github.javafaker.Faker;
 import com.github.javafaker.service.FakeValuesService;
 import com.github.javafaker.service.RandomService;
-import pojo.User;
+import model.pojo.User;
 
 import java.util.Locale;
 
 /**
- * Утилитарный класс для генерации случайных тестовых данных сущности user
+ * Утилитарный класс для генерации случайных тестовых данных сущности controllers.user
  *
  * @author  smirnov sergey
  * @since   24.04.2023

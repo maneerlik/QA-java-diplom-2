@@ -1,5 +1,6 @@
 package user;
 
+import controllers.user.UserClient;
 import io.qameta.allure.*;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
@@ -8,15 +9,15 @@ import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import pojo.User;
+import model.pojo.User;
 
 import java.util.Arrays;
 import java.util.Collection;
 
-import static pojo.UserCreds.credsFrom;
+import static model.pojo.UserCreds.credsFrom;
 import static steps.BaseSteps.checkRespBodyMessage;
 import static steps.BaseSteps.checkRespStatusCode;
-import static user.RandomUser.*;
+import static data.RandomUser.*;
 
 /**
  * Тест регистрации пользователя без обязательных полей

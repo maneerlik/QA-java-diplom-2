@@ -1,6 +1,7 @@
 package user;
 
 import com.google.gson.GsonBuilder;
+import controllers.user.UserClient;
 import io.qameta.allure.*;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
@@ -8,14 +9,14 @@ import org.apache.http.HttpStatus;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import pojo.User;
+import model.pojo.User;
 
 import java.util.logging.Logger;
 
-import static pojo.UserCreds.credsFrom;
+import static model.pojo.UserCreds.credsFrom;
 import static steps.BaseSteps.checkRespStatus;
 import static steps.BaseSteps.checkRespStatusCode;
-import static user.RandomUser.randomValidUser;
+import static data.RandomUser.randomValidUser;
 
 /**
  * Тест регистрации нового уникального пользователя

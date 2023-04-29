@@ -1,4 +1,4 @@
-package pojo;
+package model.pojo;
 
 /**
  * @author  smirnov sergey

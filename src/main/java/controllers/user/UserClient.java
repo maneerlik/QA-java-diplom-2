@@ -1,15 +1,15 @@
-package user;
+package controllers.user;
 
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-import pojo.User;
-import pojo.UserCreds;
+import model.pojo.User;
+import model.pojo.UserCreds;
 
 import static api.Endpoints.*;
 import static api.Specification.spec;
 
 /**
- * Служебный класс для взаимодействия с сущностью user
+ * Служебный класс для взаимодействия с сущностью controllers.user
  *
  * @author  smirnov sergey
  * @since   24.04.2023

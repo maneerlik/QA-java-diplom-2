@@ -40,4 +40,10 @@ public class BaseSteps {
         response.assertThat().body("message", equalTo(message));
     }
 
+    @Step("Проверка ответа")
+    public static void checkResponce(ValidatableResponse response, int status, Boolean message) {
+        checkRespStatusCode(response, status);
+        checkRespStatus(response, message);
+    }
+
 }
