@@ -9,7 +9,7 @@ import static api.Endpoints.*;
 import static api.Specification.setSpec;
 
 /**
- * Служебный класс для взаимодействия с сущностью controllers.user
+ * Служебный класс для взаимодействия с сущностью User
  *
  * @author  smirnov sergey
  * @since   24.04.2023
