@@ -8,7 +8,7 @@ import model.pojo.User;
 import java.util.Locale;
 
 /**
- * Утилитарный класс для генерации случайных тестовых данных сущности controllers.user
+ * Утилитарный класс для генерации случайных тестовых данных сущности User
  *
  * @author  smirnov sergey
  * @since   24.04.2023
