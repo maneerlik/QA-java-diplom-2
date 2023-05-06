@@ -1,3 +1,4 @@
+<!-- PROJECT LOGO -->
 <a name="readme-top"></a>
 <div align="center">
 
@@ -19,6 +20,7 @@
   <ol>
     <li><a href="#about-the-project">About The Project</a></li>
     <li><a href="#usage">Usage</a></li>
+    <li><a href="#classes">Classes</a></li>
     <li><a href="#tests">Tests</a></li>
     <li><a href="#tech-stack">Tech Stack</a></li>
   </ol>
@@ -58,6 +60,13 @@
 
 Для запуска тестов в терминале выполнить команду `mvn clean test`. 
 Для запуска отчета Allure выполнить команду `mvn allure:serve`
+
+### Classes
+* `Endpoints` - тестируемые эндпоинты
+* `Specification` - базовая спецификация запроса API
+* `IngtClient` `OrderClient` `UserClient` - утилитарные классы для взаимодействия с сущностями модели
+* `RandomUser` - генерация тестовых данных
+* `Ingredient` `Order` `User` - pojo классы, описывающие сущности модели д. сериализации/десериализации данных
 
 ### Tests
 * `UserRegistrationTest` - регистрация пользователя
