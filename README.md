@@ -16,17 +16,18 @@
 
 <!-- TABLE OF CONTENTS -->
 <details>
-  <summary>Table of Contents</summary>
+  <summary>Содержание:</summary>
   <ol>
-    <li><a href="#about-the-project">About The Project</a></li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#classes">Classes</a></li>
-    <li><a href="#tests">Tests</a></li>
-    <li><a href="#tech-stack">Tech Stack</a></li>
+    <li><a href="#about-the-project">О проекте</a></li>
+    <li><a href="#usage">Запуск</a></li>
+    <li><a href="#classes">Классы</a></li>
+    <li><a href="#tests">Тесты</a></li>
+    <li><a href="#tech-stack">Стек</a></li>
   </ol>
 </details>
 
-## About The Project
+## О проекте
+<a name="readme-top"></a>
 Необходимо протестировать API для <a href="https://stellarburgers.nomoreparties.site/">Stellar Burgers</a>.
 Документация <a href="https://code.s3.yandex.net/qa-automation-engineer/java/cheatsheets/paid-track/diplom/api-documentation.pdf">API</a>.
 
@@ -55,7 +56,8 @@
 * авторизованный пользователь;
 * неавторизованный пользователь.
 
-## Usage
+## Запуск
+<a name="readme-top"></a>
 Для запуска тестов в терминале выполнить команду 
 ```
 mvn clean test
@@ -65,14 +67,16 @@ mvn clean test
 mvn allure:serve
 ```
 
-## Classes
+## Классы
+<a name="readme-top"></a>
 * `Endpoints` - тестируемые эндпоинты
 * `Specification` - базовая спецификация запроса API
 * `IngtClient` `OrderClient` `UserClient` - утилитарные классы для взаимодействия с сущностями модели
 * `RandomUser` - генерация тестовых данных
 * `Ingredient` `Order` `User` - pojo классы, описывающие сущности модели д. сериализации/десериализации данных
 
-## Tests
+## Тесты
+<a name="readme-top"></a>
 * `UserRegistrationTest` - регистрация пользователя
 * `UserRegistrationWithoutRequiredFieldTest` - регистрация пользователя без обязательных полей
 * `UpdateUserTest` - обновление информации пользователя
@@ -82,7 +86,8 @@ mvn allure:serve
 * `CreateOrderTest` - создание заказа
 * `GettingUserOrders` - получение заказов
 
-## Tech Stack
+## Стек
+<a name="readme-top"></a>
 [![Java11][java]][javadoc-url]
 [![JUnit4][junit]][junit-url]
 [![REST Assured][REST_Assured]][rest-assured-url]
