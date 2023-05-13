@@ -81,8 +81,6 @@ mvn allure:serve
 * `UserRegistrationWithoutRequiredFieldTest` - регистрация пользователя без обязательных полей
 * `UpdateUserTest` - обновление информации пользователя
 * `ExistingUserAuthorizationTest` - регистрация существующего пользователя 
-  
-
 * `CreateOrderTest` - создание заказа
 * `GettingUserOrders` - получение заказов
 
